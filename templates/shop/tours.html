@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Mary`s main page{% endblock %}
+
+{% block content %}
+<section id="kardy">
+    <div class="container pt-5 pb-3 text-center">
+        <h2 class="fw-bold">Greetings!</h2>
+        <h4 class="fw-bold">Embark on a captivating journey through the my website. Discover remarkable tours, hidden gems and travel tips that will make your adventures unforgettable.</h4>
+        <h4 class="fw-bold">Enjoy exploring!</h4>
+    </div>
+    <div class="container pt-5 pb-3 text-center">
+        <h1 class="fw-bold">My tours</h1>
+    </div>
+    {% comment %} S E A R C H {% endcomment %}
+    <div class="container pt-5 pb-3">
+        <form action="">
+            <div class="mb-3 linie">
+                <input type="text" name="searchTour" class="form-control bg-danger bg-opacity-10 border border-1 border-danger">
+            </div>
+            <button type="submit" class="btn btnwhite border border-danger border-1 rounded-pill px-4 py-1 my-3 text-danger">
+                Search
+            </button>
+        </form>
+    </div>
+
+    {% comment %} CARDS (tours) from DB {% endcomment %}
+    <div class="container d-flex justify-content-between gy-2 pb-5">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+            {% for tour in tours %}
+            <div v-for="tour in tours" class="col mb-2">
+                <div class="blog card h-100 bg-light border rounded">
+                    <img class="card-img-top" src="{{ tour.image.url }}" alt="photo">
+                    <div class="card-body" style="height: 18rem; overflow: hidden;">
+                        <h5 class="card-title fw-bold ms-2"><a class="text-danger" href="{{tour.id}}">{{ tour.title }}</a></h5>
+                        <p class="card-text ms-2">{{ tour.description }}</p>
+                    </div>
+                    <div class="card-footer mb-3 border-0 bg-light">
+                        <a class="btnwhite border border-danger border-2 rounded-pill px-4 text-danger ms-2"
+                        href="{% url 'shop:single_tour' tour.id %}">Read more ...</a>
+                        {% comment %}  2. вариант, если в urls.py (shop) убрать app_name = 'shop', то и здесь удалить shop: 1.- см. h5 card-title,{% endcomment %}
+                    </div>
+                </div>
+            </div>        
+            {% endfor %}
+        </div>
+    </div>
+   
+</section>
+{% endblock %}

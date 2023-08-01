@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{tour.title}}{% endblock %}
+
+{% block content %}
+<div class="container mb-5">
+    <h1 class="mt-5 mb-5">{{tour.title}}</h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <p>{{ tour.description }}</p>
+        </div>
+        <div class="col-sm-4 bg-danger text-center bg-danger bg-opacity-10 border border-3 border-danger rounded">
+            <p class="pt-5"><b>Price:</b> {{tour.price}} euro</p>
+        </div>
+    </div>
+    
+    <p><b>Group`s quantity:</b> {{tour.place_qty}} people</p>
+    <p><b>Meeting place:</b> {{tour.meeting_place}}</p>
+    <p><b>Meeting time:</b> {{tour.meeting_time}}</p>
+    <p><b>Duration:</b> {{tour.duration}} hours</p>
+
+
+    <h3>Calculate price</h3>
+    <form action="" class="bg-dark p-5 price mb-5">
+        <label class="text-danger pe-5">Choose number of people</label>
+        <input name="calculate" type="number" class="border border-1 border-danger bg-danger bg-opacity-10 text-danger">
+        <button class="btn btnwhite border border-danger border-1 rounded-pill px-4 py-1 text-danger ms-5">Calculate price</button>
+    </form>
+    <h5 class="mb-3">Total price: <b>{{ total_price }}</b> EUR</h5>
+    <button class="btn btnwhite border border-danger border-1 rounded-pill px-4 py-1 text-danger">Buy</button>
+
+
+    <h3 class="mt-5">Reviews</h3>
+    <!-- new code -->
+    {% if user.is_authenticated %}
+    <!-- Users who are not logged in will not see the Add Review link. -->
+        <a href="{% url 'shop:createreview' tour.id %}" class="btn btnwhite border border-danger border-1 rounded-pill px-4 py-1 text-danger my-3">Add Review</a>
+    {% endif %}
+
+    {% if user.is_authenticated and not reviews%}
+        <h5>There is no any review jet.  Leave your feedback and be the first.</h5>
+    {% elif not reviews %}
+        <h5>There is no any review yet.</h5>
+    {% endif %}
+
+    
+    <ul class="list-group">
+        {% for review in reviews %}
+        <li class="list-group-item pb-3 pt-3">
+            <h5 class="card-title">
+                Review by <span class="text-success">{{ review.user.username }}</span>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+                {{ review.date }}
+            </h6>
+            <p class="card-text">{{ review.text }}</p>
+            <p class="card-text">I give: {{ review.stars }} stars</p>
+
+            {% with ''|center:review.stars as stars %}
+            {% for _ in stars %}
+                <img src="../../media/shop/images/star.png" alt="Star">
+            {% endfor %}                
+            {% endwith %}
+
+            <br>
+            
+
+            {% if user.is_authenticated and user == review.user %}
+                <a class="btn btnwhite border border-danger border-1 rounded-pill px-4 py-1 text-danger me-2 mt-3" href="{% url 'shop:updatereview' review.id %}">Update</a>
+                <a class="btn btn-danger rounded-pill px-4 py-1 mt-3" href="{% url 'shop:deletereview' review.id %}">Delete</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+<section id="last_photo" class="img-fluid  pt-4 pb-5 d-flex justify-content-center  align-items-center">
+    <div id="overlay"></div>
+    <div class="container d-flex justify-content-center text-center  text-black">
+        <div class=" above container_sm mt-4">
+            <p class="pb-3 fs-5 lh-lg text-white">Welcome to the Czech Republic, a captivating country nestled in the heart of Europe. From its enchanting medieval castles and cobblestone streets to its lush green landscapes and rich cultural heritage, the Czech Republic offers a truly unforgettable experience.</p>
+            <p class="pb-5 fs-5 lh-lg text-white">Delight in the world-famous Pilsner beer, explore the charming alleys of Prague's Old Town, and immerse yourself in the nation's love for art, music, and literature.</p>
+            <p class=" pb-5 fs-5 fw-bold text-white">Create memories for a lifetime.</p>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+
+
+        {% comment %} <div class="p-5 col-sm-4 bg-info bg-opacity-10 border border-3 border-info rounded"> {% endcomment %}

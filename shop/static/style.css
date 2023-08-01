@@ -1,0 +1,124 @@
+.navbar-toggler {
+    background-color: #ca637f;
+
+}
+
+
+/*  F  O  O  T  E  R  base.html  */
+.foot_icons ul {
+    list-style-type: none;
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.foot_icons ul li {
+    margin-right: 20px;
+    justify-content: start;
+
+}
+
+.columns-2 {
+    /* background-color: bisque; */
+    height: 80px;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.columns-2 a {
+    color: white;
+
+}
+
+.at {
+    position: relative;
+    top: -27px;
+    left: 67px;
+    /* color: red; */
+}
+
+
+
+/* - = - = - = - = - = - T O U R S.html - = - = - = - = - = - = - =*/
+.linie {
+    display: inline;
+}
+
+
+
+.blog>img {
+    transition: all 1s;
+}
+
+.blog>img:hover {
+    transform: scale(1.03);
+}
+
+.btnwhite {
+    text-decoration: none;
+    padding: 5px;
+    font-size: 17px;
+}
+
+.btnwhite:hover {
+    /* border: 2px solid #9f5468; */
+    background-color: #dc143c !important;
+    border-color: #ec7998 !important;
+    color: white !important;
+}
+
+
+
+/* - = - = - = - = - = - SINGLE_TOUR.html - = - = - = - = - = - = - =*/
+.price {
+    border-radius: 10px;
+}
+
+#last_photo {
+    background: url(../../media/shop/images/nightprague.jpg) bottom center / cover no-repeat;
+    min-height: 650px;
+    position: relative;
+    z-index: 1;
+    /*co bude vys - obrazek (Prague) nebo overlay - nevadi, hlavne aby above byl nahore*/
+}
+
+#last_photo #overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    /*co bude vys - obrazek (wooden) nebo overlay - nevadi, hlavne aby above byl nahore*/
+}
+
+.above {
+    z-index: 3;
+}
+
+
+/* -*-*-*-*- M E D I A -*-*--*-*-*-*-* */
+@media screen and (max-width: 600px) {
+    body {
+        background-color: aqua !important;
+    }
+
+    h1 {
+        color: blue !important;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    #kardy .card {
+        width: 30rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    h2 {
+        padding-bottom: 20px;
+    }
+
+}

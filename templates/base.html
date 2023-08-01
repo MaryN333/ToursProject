@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> {% comment %} icons {% endcomment %}
+    <link rel="shortcut icon" href="../../media/shop/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{%static '../static/style.css'%}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark sticky-top p-3">
+        <div class="container">
+            <a href="{% url 'shop:index'%}" class="navbar-brand text-danger"><h3>Mary`s Final Django Project</h3></a>
+            <span class="navbar-text">
+                <a href="{% url 'shop:index'%}" class="me-5 text-danger">Home</a>
+                <a href="/admin/" class="me-5 text-danger" target="_blank">Admin</a>
+                <a href="api/v1/" class="me-5 text-danger" target="_blank">API</a>
+                <!-- new code:  -->
+                {% if user.is_authenticated %}
+                <a class="text-danger" href="{% url 'logoutaccount' %}">Logout ({{ user.username }})</a>
+                {% else %}
+                <a class="me-4 text-danger" href="{% url 'loginaccount' %}">Login</a>
+                <a class="text-danger" href="{% url 'signupaccount' %}">Sign Up</a>
+                {% endif %}
+
+            <!-- end new code -->
+            </span>
+        </div>
+    </nav>
+    
+
+    <main>
+            {% block content %}
+            {% endblock %}
+    </main>
+
+    <footer class="bg-dark pt-4">
+        <div class="container text-white py-5">
+            <div class="row pb-5">
+                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <h2 class="mb-3"><i class="bi bi-wechat fs-3 me-2"></i> Maru</h2>
+                    <h5>Enjoy my first Django project.</h5><h5>In the project I used:</h5>
+                        <div class="foot_icons">
+                            <ul>
+                                <li><a href="https://docs.python.org/3/" target="_blank"><img src="../media/shop/images/icon_python.png" alt="Python"></a></li>
+                                <li><a href="https://docs.djangoproject.com/en/4.2/" target="_blank"><img src="../media/shop/images/icon_django.png" alt="Django"></a></li>
+                                <li><a href="https://www.sqlite.org/index.html" target="_blank"><img src="../media/shop/images/icon_sqlite3.png" alt="SQLite3"></a></li>
+                                <li><a href="#" target="_blank"><img src="../media/shop/images/icon_html.png" alt="HTML"></a></li>
+                                <li><a href="https://getbootstrap.com/" target="_blank"><img src="../media/shop/images/icon_bootstrap.png" alt="Bootstrap"></a></li>
+                                <li><a href="#" target="_blank"><img src="../media/shop/images/icon_css.png" alt="CSS"></a></li>
+                            </ul>
+                        </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <h2 class="mb-3 ps-5">Contacts</h2>
+                    <p class="mb-1 ps-5">sidyakina &nbsp;&nbsp;&nbsp;gmail.com</p>
+                    <span class="at ps-5">@</span>
+                    <div class="foot_icons">
+                        <ul class="ps-5">
+                            <li><a href="https://www.github.com/"><i class="bi bi-github"></i></a></li>
+                            <li><a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com/"><i class="bi bi-linkedin"></i></a></li>
+                            <li><a href="https://www.twitter.com/"><i class="bi bi-twitter"></i></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <h2>Other</h2>
+                    <ul class="columns-2 d-flex">
+                        <li><a href="#">Introduction</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Contacts</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Cookie</a></li>
+                        <li><a href="#">Personal data protection</a></li>
+                    </ul>
+    
+                </div>
+            </div>   
+        </div>
+    </footer>
+</body>
+</html>
